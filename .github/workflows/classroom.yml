@@ -1,0 +1,80 @@
+name: Autograding Tests
+'on':
+- push
+- repository_dispatch
+permissions:
+  checks: write
+  actions: read
+  contents: read
+jobs:
+  run-autograding-tests:
+    runs-on: ubuntu-latest
+    if: github.actor != 'github-classroom[bot]'
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+    - name: EX01 - reverse_list
+      id: ex01-reverse_list
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: EX01 - reverse_list
+        setup-command: pip install -r requirements.txt
+        command: python -m pytest -q -k test_ex01_reverse_list
+        timeout: 30
+        max-score: 10
+    - name: EX02 - unique_preserve_order
+      id: ex02-unique_preserve_order
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: EX02 - unique_preserve_order
+        setup-command: pip install -r requirements.txt
+        command: python -m pytest -q -k test_ex02_unique_preserve_order
+        timeout: 30
+        max-score: 20
+    - name: EX03 - min_max_prices
+      id: ex03-min_max_prices
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: EX03 - min_max_prices
+        setup-command: pip install -r requirements.txt
+        command: python -m pytest -q -k test_ex03_min_max_prices
+        timeout: 30
+        max-score: 15
+    - name: EX04 - best_student
+      id: ex04-best_student
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: EX04 - best_student
+        setup-command: pip install -r requirements.txt
+        command: python -m pytest -q -k test_ex04_best_student
+        timeout: 30
+        max-score: 15
+    - name: EX05 - currency_symbol
+      id: ex05-currency_symbol
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: EX05 - currency_symbol
+        setup-command: pip install -r requirements.txt
+        command: python -m pytest -q -k test_ex05_currency_symbol
+        timeout: 30
+        max-score: 10
+    - name: EX06 - checkout
+      id: ex06-checkout
+      uses: classroom-resources/autograding-command-grader@v1
+      with:
+        test-name: EX06 - checkout
+        setup-command: pip install -r requirements.txt
+        command: python -m pytest -q -k test_ex06_checkout
+        timeout: 30
+        max-score: 30
+    - name: Autograding Reporter
+      uses: classroom-resources/autograding-grading-reporter@v1
+      env:
+        EX01-REVERSE_LIST_RESULTS: "${{steps.ex01-reverse_list.outputs.result}}"
+        EX02-UNIQUE_PRESERVE_ORDER_RESULTS: "${{steps.ex02-unique_preserve_order.outputs.result}}"
+        EX03-MIN_MAX_PRICES_RESULTS: "${{steps.ex03-min_max_prices.outputs.result}}"
+        EX04-BEST_STUDENT_RESULTS: "${{steps.ex04-best_student.outputs.result}}"
+        EX05-CURRENCY_SYMBOL_RESULTS: "${{steps.ex05-currency_symbol.outputs.result}}"
+        EX06-CHECKOUT_RESULTS: "${{steps.ex06-checkout.outputs.result}}"
+      with:
+        runners: ex01-reverse_list,ex02-unique_preserve_order,ex03-min_max_prices,ex04-best_student,ex05-currency_symbol,ex06-checkout
