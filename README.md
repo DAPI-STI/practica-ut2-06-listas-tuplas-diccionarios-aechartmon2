@@ -1,3 +1,4 @@
+[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-22041afd0340ce965d47ae6ef1cefeee28c7c493a6346c4f15d667ab976d596c.svg)](https://classroom.github.com/a/PXTCo7pA)
 # Práctica 02.06 · Listas, tuplas y diccionarios (funciones + tests)
 
 En esta práctica vas a resolver **6 ejercicios** para practicar **tipos de datos compuestos**:
