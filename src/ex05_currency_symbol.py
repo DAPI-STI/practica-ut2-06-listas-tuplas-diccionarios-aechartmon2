@@ -11,4 +11,9 @@ def currency_symbol(currency: str) -> str | None:
 
     - No lanza error si la divisa no está.
     """
-    raise NotImplementedError("Implementa currency_symbol(currency)")
+    return CURRENCIES.get(currency)
+print(currency_symbol("Euro"))
+print(currency_symbol("Dollar"))
+print(currency_symbol("Peso"))
+print(currency_symbol("Yen"))
+print(currency_symbol("Libra"))
