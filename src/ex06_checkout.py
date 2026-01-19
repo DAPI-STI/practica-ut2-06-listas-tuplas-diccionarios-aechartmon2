@@ -30,8 +30,10 @@ def checkout(cart: list[tuple[str, int]]) -> tuple[dict[str, float], float]:
         if product not in PRICES:
             raise ValueError(f"El producto {product} no existe en PRICES")
         line_cost = PRICES[product] * units
-        costs[product] = costs.get(product, 0) + line_cost
+        costs[product] = costs.get(product, 0.0) + line_cost
         total += line_cost
+    costs = {p:round(c,2) for p,c in costs.items()}
+    total = round(total,2)
     return costs, total
 cart = [("Pan", 2), ("Huevos", 1), ("Pan", 1)]
 cost, total = checkout(cart)
